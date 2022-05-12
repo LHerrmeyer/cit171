@@ -2,6 +2,7 @@
 
 let userName = "";
 let password = "";
+let phonenumber = "";
 let verifypassword = "";
 let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
@@ -15,6 +16,10 @@ function setuserpassword(){
     if (!valid){
         alert('Must be 6 digits, upper, lower, number, and symbol');
     }
+}
+
+function setphonenumber(){
+    phonenumber = $("#phonenumber").val();
 }
 
 function setverifypassword(){
@@ -46,9 +51,19 @@ function checkexpiredtoken(token){
     }
 }
 
+function sendtext(){
+    setphonenumber();
+    $.ajax({
+        type: 'POST',
+        url: 'https://dev.stedi.me/twofactorlogin/' + phonenumber,
+        contentType: "application/text",
+        dataType: 'text'
+    });
+}
+
 function userlogin(){
     setuserpassword();
-    setusername();
+    //setusername();
     $.ajax({
         type: 'POST',
         url: 'https://dev.stedi.me//login',
