@@ -4,6 +4,7 @@ let userName = "";
 let password = "";
 let phonenumber = "";
 let verifypassword = "";
+let otp = "";
 let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
 function setusername(){
@@ -12,6 +13,10 @@ function setusername(){
 
 function setuserpassword(){
     password = $("#password").val();
+}
+
+function setotp(){
+    otp = $("#otp").val();
 }
 
 function setphonenumber(){
@@ -58,13 +63,13 @@ function sendtext(){
 }
 
 function userlogin(){
-    setuserpassword();
+    setotp();
     $.ajax({
         type: 'POST',
         url: 'https://dev.stedi.me/twofactorlogin',
         data: JSON.stringify({
             "phoneNumber": phonenumber,
-            "oneTimePassword": password
+            "oneTimePassword": otp
         }),
         success: function(data){
             window.location.href = "/timer.html#"+data;//add the token to the url
@@ -110,10 +115,12 @@ function createuser(){
         type: 'POST',
         url: '/user',
         data: JSON.stringify({userName, 'email': userName, password, 'verifyPassword': vpwd, 'accountType':'Personal'}),//we are using the email as the user name
-        success: function(data) { alert(data);
-//        readonlyforms("newUser");
-//        alert(readonlyforms("newUser"));
-        window.location.href = "/index.html"},
+        success: function(data) {
+            alert(data);
+//          readonlyforms("newUser");
+//          alert(readonlyforms("newUser"));
+            window.location.href = "/index.html"
+        },
         contentType: "application/text",
         dataType: 'text'
     });
