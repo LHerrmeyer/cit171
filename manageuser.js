@@ -1,7 +1,6 @@
 //© 2021 Sean Murdock
 
 let userName = "";
-let password = "";
 let phonenumber = "";
 let verifypassword = "";
 let otp = "";
@@ -9,10 +8,6 @@ let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
 function setusername(){
     userName = $("#username").val();
-}
-
-function setuserpassword(){
-    password = $("#password").val();
 }
 
 function setotp(){
@@ -75,7 +70,7 @@ function userlogin(){
             window.location.href = "/timer.html#"+data;//add the token to the url
         },
         error: function(jqXHR, exception){
-            alert("Error code (" + jqXHR.status + "): '" + jqXHR.responseText + "'");
+            alert("Error code (" + jqXHR.status + "):\n" + jqXHR.responseText);
         },
         contentType: "application/text",
         dataType: 'text'
